@@ -2,6 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, jsonify
 from flaskapp import app, db
 from flaskapp.forms import MovieForm, SearchForm
 from flaskapp.models import Movie, Genre, MovieSchema
+from pathlib import Path
 import json
 
 @app.route("/")
@@ -183,7 +184,8 @@ def import_dummy():
     db.create_all()
 
     # Open file dummy.json
-    with open("flaskapp\dummy.json") as json_file:
+    file_to_open = Path("flaskapp/dummy.json")
+    with open(file_to_open) as json_file:
         # Convert json to be dictionary
         movies_dict = json.load(json_file)["data"]
         movies = []
